@@ -10,7 +10,7 @@ class MyClient(discord.Client):
 
     
     async def on_ready(self):
-        await client.change_presence(activity=discord.Game('watching Oshcord! | s!'))   #status message
+        await client.change_presence(activity=discord.Game("watching Ocean's lair | s!"))   #status message
         print("logged in")
 
     async def on_message(self, message):
@@ -228,7 +228,7 @@ class MyClient(discord.Client):
 
             if message.author.id == (792109318408634398):
                 print('this is working')
-                await message.channel.send('hi there! <@!690227486721966130> also hi! ')
+                await message.channel.send('oh hello there. here's <@!690227486721966130> to deal with ya')
           
 
 client = MyClient()
