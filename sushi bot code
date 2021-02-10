@@ -226,10 +226,7 @@ class MyClient(discord.Client):
                 print('pokeee')
                 await message.channel.send('*poke*')
 
-            if message.author.id == (792109318408634398):
-                print('this is working')
-                await message.channel.send('oh hello there. here's <@!690227486721966130> to deal with ya')
-          
+
 
 client = MyClient()
 client.run('[bot token]') # << bot token
