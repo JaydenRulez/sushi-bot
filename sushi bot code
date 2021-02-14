@@ -1,8 +1,13 @@
-import discord
+import discord 
 import random
-import datetime            #full code, ill update it when i remeber
+import datetime
+import time
+import sys
+import random
 
-hort = ['heads','tails']
+
+
+
 
 n = random.randint(0,1)
 
@@ -10,12 +15,20 @@ class MyClient(discord.Client):
 
     
     async def on_ready(self):
-        await client.change_presence(activity=discord.Game("watching Ocean's lair | s!"))   #status message
         print("logged in")
+
+        await client.change_presence(activity=discord.Game("watching ocean's lair! | s!"))
+
+
+        
 
     async def on_message(self, message):
         msg = message.content.upper()
         if message.author != client.user:
+
+#failsafe    
+            if msg == 'S!SHY':
+                sys.exit()
 
 #help commands
                 
@@ -34,14 +47,15 @@ class MyClient(discord.Client):
                 embedVar.add_field(name="s!poke @user", value="pokes people", inline=False)
                 embedVar.add_field(name="s!cuddle @user", value="sends a cuddle to somone!", inline=False)
                 embedVar.add_field(name="s!headpat @user", value="headpats a user", inline=False)
-                embedVar.add_field(name="s!blep", value="blep.", inline=False) #not pinging commands
+                embedVar.add_field(name="s!blep", value="blep.", inline=False)#not pinging commands
+                embedVar.add_field(name="s!8ball", value="ask the great 8ball for the answer!", inline=False) 
                 await message.channel.send(embed=embedVar)
 
             if msg == 'S!HELPGENERAL':
                 print('help needed|general | line 47')
                 embedVar = discord.Embed(title="hi! im sushi bot! the protector of this server", description="heres all of my general commands that i can do!! ", color=0xf59f7a)
                 embedVar.add_field(name="s!ping", value="p i n g", inline=False)
-                embedVar.add_field(name="coming soon", value="coming soon", inline=False)
+                embedVar.add_field(name="s!shutdown", value="shuts the bot down, just in case", inline=False)
                 embedVar.add_field(name="coming soon", value="coming soon", inline=False)
                 await message.channel.send(embed=embedVar)
 
@@ -73,12 +87,24 @@ class MyClient(discord.Client):
                 await message.channel.send("https://c.tenor.com/FAQ1w6_7X8cAAAAM/anime-cuddle.gif *head pats* " + headpatted)
             if msg.startswith("S!BLEP"):
                 print('blep')
-                await message.channel.send('https://c.tenor.com/1sX3pxWwUfsAAAAM/mafumafu-cute.gif') 
+                await message.channel.send('https://c.tenor.com/1sX3pxWwUfsAAAAM/mafumafu-cute.gif')
+
+            #if msg.startswith("IM"):
+             #   dadJoke = msg.split(" ")[1:] #hehe line 69
+              #  space = " "
+               # string = space.join(dadJoke)
+                #print('dad jokeeeee')
+                #await message.channel.send("hi! " + string + "i'm sushi bot!") 
+            
 
             #general commands:
             if msg == 'S!PING':
                 print('ping pong | line 86') 
-                await message.channel.send(f'pong! :ping_pong: | message took {round(client.latency * 1000)}ms') 
+                await message.channel.send(f'pong! :ping_pong: | message took {round(client.latency * 1000)}ms')
+            if msg == "S!SHUTDOWN":
+                await message.channel.send("Bot is shutting down now.")
+                await message.channel.send("<@!690227486721966130>, bot was shutdown by " + str(message.author))
+                sys.exit()
 
             #server commands:
             if msg == 'S!TRIGGER':
@@ -185,7 +211,7 @@ class MyClient(discord.Client):
             if msg == "S!RULESTEXT":
                 print('rules 1')
                 embed=discord.Embed(title="rules in text channels:", color=0x2c90dd)
-                embed.add_field(name="1)", value="swearing is only aloud in #lexs-cars and #lexs-shit, swearing is not aloud in other channels", inline=False)
+                embed.add_field(name="1)", value="swearing is not allowed, sushi bot will censor all curses and repeatedly attempting to swear will result in a mute", inline=False)
                 embed.add_field(name="2)", value="Racism, hate speech, or segregation is not allowed here. This includes threats. ", inline=False)
                 embed.add_field(name="3)", value="No spamming of any sorts is allowed here. That includes images, text, emojis, or gifs.", inline=False)
                 embed.add_field(name="4)", value="No graphic gore, porn, or anything 18+, that will not be tolerated here, it will result in an instant ban.", inline=False)
@@ -196,7 +222,7 @@ class MyClient(discord.Client):
                 print('rules 2 | vc')
                 embed=discord.Embed(title="rules in voice channels", color=0x2c90dd)
                 embed.add_field(name="1) ", value="all rules above must be followed at all times", inline=False)
-                embed.add_field(name="2)", value="screaming, earrape and making obnoxious sounds in VC will not be tolerated ", inline=False)
+                embed.add_field(name="2)", value="screaming, earrape and making obnoxious sounds in VC will not be tolerated (to be verified do s!verify in the correct channel) ", inline=False)
                 embed.add_field(name="3)", value="swearing is to be kept to a minimum (only in songs)", inline=True)
                 await message.channel.send(embed=embed)
 
@@ -215,6 +241,8 @@ class MyClient(discord.Client):
                 embed.add_field(name="have fun:", value="we hope you have fun here and appreciate the work that goes into the server, now go drink a coffee and talk on the server ", inline=False)
                 await message.channel.send(embed=embed)
 
+
+
 #testing
             if msg == "OCEAN EYES":
                 print("ocean eyes test")
@@ -226,7 +254,32 @@ class MyClient(discord.Client):
                 print('pokeee')
                 await message.channel.send('*poke*')
 
+            if message.author.id == (792109318408634398):
+                print('this is working')
+                await message.channel.send("oh hello there. Here's  <@!342247408379363329> to deal with ya")
 
+            ball_response = ["As I see it, yes", "Ask again later.", "Better not tell you now.", "Cannot predict now.", "Concentrate and ask again.", "Dont count on it.", "It is certain.", "It is decidedly so.", "Most likely", "My reply is no.", "My sources say no.", "Outlook not so good.", "outlook good.", "Reply hazy, try again.", "Signs point to yes.", "Very doubtful.", "Without a doubt.", "Yes.", "Yes - definitly.", "No.", ]
+            lucky_phrase = random.randint(0,len(ball_response)-1)
+
+            if msg.startswith("S!8BALL"):
+                print("8ball")
+                await message.channel.send(ball_response[lucky_phrase])
+
+            if msg == "S!VERIFY":
+                role = discord.Object(571424621748944907)  #townsfolk role
+                role2 = discord.Object(810212137472622602)  #unverified role
+                print('verified')
+                await message.author.remove_roles(role2)
+                await message.author.add_roles(role)
+                await message.delete()
+    
+
+
+
+
+            
 
 client = MyClient()
-client.run('[bot token]') # << bot token
+client.run('[bot token') # << bot token
+
+#command prefix s!
