@@ -5,10 +5,6 @@ import time
 import sys
 import random
 
-
-
-
-
 n = random.randint(0,1)
 
 class MyClient(discord.Client):
@@ -17,7 +13,7 @@ class MyClient(discord.Client):
     async def on_ready(self):
         print("logged in")
 
-        await client.change_presence(activity=discord.Game("[status message]| s!"))
+        await client.change_presence(activity=discord.Game("watching ocean's lair! | s!"))
 
 
         
@@ -27,7 +23,7 @@ class MyClient(discord.Client):
         if message.author != client.user:
 
 #failsafe    
-            if msg == 'S!SHY':
+            if msg == 'S!SHUTDOWN':
                 sys.exit()
 
 #help commands
@@ -49,6 +45,7 @@ class MyClient(discord.Client):
                 embedVar.add_field(name="s!headpat @user", value="headpats a user", inline=False)
                 embedVar.add_field(name="s!blep", value="blep.", inline=False)#not pinging commands
                 embedVar.add_field(name="s!8ball", value="ask the great 8ball for the answer!", inline=False) 
+                embedVar.add_field(name="s!yeet", value="YEET (this is your fault griffin)", inline=False) 
                 await message.channel.send(embed=embedVar)
 
             if msg == 'S!HELPGENERAL':
@@ -85,6 +82,10 @@ class MyClient(discord.Client):
                 headpatted = msg.split(" ")[-1]
                 print('headpat sent | line 77')
                 await message.channel.send("https://c.tenor.com/FAQ1w6_7X8cAAAAM/anime-cuddle.gif *head pats* " + headpatted)
+            if msg.startswith("S!YEET"):
+                yeeted = msg.split(" ")[-1]
+                print('yeeeeeeeeeet | 86')
+                await message.channel.send("https://tenor.com/view/yeet-lion-king-simba-rafiki-throw-gif-16194362 *YEEEETS* " + yeeted)
             if msg.startswith("S!BLEP"):
                 print('blep')
                 await message.channel.send('https://c.tenor.com/1sX3pxWwUfsAAAAM/mafumafu-cute.gif')
@@ -217,7 +218,7 @@ class MyClient(discord.Client):
                 embed.add_field(name="4)", value="No graphic gore, porn, or anything 18+, that will not be tolerated here, it will result in an instant ban.", inline=False)
                 embed.add_field(name="5)", value="No pinging mass pings, this will lead to an instant permanent ban.", inline=False)
                 await message.channel.send(embed=embed)
-
+#rules:
             if msg == "S!RULESVC":
                 print('rules 2 | vc')
                 embed=discord.Embed(title="rules in voice channels", color=0x2c90dd)
@@ -272,14 +273,19 @@ class MyClient(discord.Client):
                 await message.author.remove_roles(role2)
                 await message.author.add_roles(role)
                 await message.delete()
-    
-
-
-
-
             
-
+            if msg == "PRESS F TO PAY RESPECTS":
+                print('f in the chats bois')
+                await message.channel.send('F')
+            
+        # 1 todo:
+        # 2 make the army | finished
+        # 3 kill beka |unfinished
+        # 4 kill chocolate cult | unfinished
+        # 5 take over the world | unfinished
+        
+     
+     
 client = MyClient()
-client.run('[bot token') # << bot token
-
-#command prefix s!
+client.run('[token]') # << bot token
+    
